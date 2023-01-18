@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_17_092700) do
+ActiveRecord::Schema.define(version: 2023_01_18_051552) do
 
   create_table "produces", force: :cascade do |t|
     t.string "produce"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 2023_01_17_092700) do
     t.integer "expiring_quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.string "type"
+    t.integer "user_id"
   end
 
 end
