@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_18_051552) do
+ActiveRecord::Schema.define(version: 2023_01_24_215024) do
+
+  create_table "carts", force: :cascade do |t|
+    t.string "produce"
+    t.float "price"
+    t.integer "quantity"
+    t.float "total"
+    t.boolean "purchase"
+    t.string "name"
+    t.integer "phone"
+    t.boolean "discount"
+    t.float "discount_cost"
+    t.integer "discount_quantity"
+  end
 
   create_table "produces", force: :cascade do |t|
     t.string "produce"
@@ -19,11 +32,12 @@ ActiveRecord::Schema.define(version: 2023_01_18_051552) do
     t.boolean "expiring_soon"
     t.float "expiring_price"
     t.integer "expiring_quantity"
+    t.integer "cart_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.string "type"
-    t.integer "user_id"
+    t.string "kind"
+    t.index ["cart_id"], name: "index_produces_on_cart_id"
   end
 
 end

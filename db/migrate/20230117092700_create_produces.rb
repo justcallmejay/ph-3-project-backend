@@ -7,6 +7,7 @@ class CreateProduces < ActiveRecord::Migration[6.1]
       t.boolean :expiring_soon
       t.float :expiring_price
       t.integer :expiring_quantity
+      t.belongs_to :cart
 
       t.timestamps
     end
