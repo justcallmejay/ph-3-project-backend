@@ -1,4 +1,5 @@
 class Cart < ActiveRecord::Base
-    has_many :produces
+    belongs_to :produces
+    belongs_to :orders
 
 end

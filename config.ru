@@ -12,6 +12,6 @@ end
 use Rack::JSONBodyParser
 
 run ApplicationController
-use PurchasesController
+use OrdersController
 use CartsController
 use ProducesController

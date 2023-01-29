@@ -1,5 +1,6 @@
 class Produce < ActiveRecord::Base
     belongs_to :cart
+    has_many :orders, through: :carts
 
     # def self.find_by_produce(type)
     #     search_result = Produce.map {|proudce| produce.kind = type }
