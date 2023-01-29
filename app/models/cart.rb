@@ -1,5 +1,5 @@
 class Cart < ActiveRecord::Base
-    belongs_to :produces
-    belongs_to :orders
+    belongs_to :produce
+    belongs_to :order
 
 end
