@@ -1,11 +1,12 @@
 class CreateCarts < ActiveRecord::Migration[6.1]
   def change
     create_table :carts do |t|
-      t.string    :produce
-      t.float     :price
       t.integer   :quantity
       t.float     :total
-      t.string    :image
+      t.belongs_to :produce
+      t.belongs_to :order
+
+      t.timestamps
     end
   end
 end

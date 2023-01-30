@@ -1,21 +1,29 @@
 class CartsController < ApplicationController
 
   #get all items that are not purchased
+  # get '/cart' do
+  #   cart = Cart.all
+  #   cart.to_json
+  # end
+
   get '/cart' do
-    cart = Cart.where(purchase: false)
-    cart.to_json
+    cart = Cart.all
+    cart.to_json(include: {
+      produce: { only: [:image, :produce, :price] }
+    })
   end
-  
+
   get '/purchase' do
     cart = Cart.where(purchase: true)
     cart.to_json
   end
 
-  post '/cart/:id' do
+  post '/carts' do
     cart = Cart.create(
-      id: params[:id],
-      quantity: params[:quantity],
-      total: params[:total]
+      # produce_id: params[:produce_id],
+      # order: params[:order_id],
+      quantity: params[:quantity]
+      # total: params[total]
     )
     cart.to_json
   end

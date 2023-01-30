@@ -4,10 +4,11 @@ class CreateProduces < ActiveRecord::Migration[6.1]
       t.string :produce
       t.float :price
       t.integer :quantity
-      t.boolean :expiring_soon
-      t.float :expiring_price
-      t.integer :expiring_quantity
-      t.belongs_to :cart
+      t.boolean :discount
+      t.float :discount_price
+      t.integer :discount_quantity
+      t.string :image
+      t.string :kind
 
       t.timestamps
     end

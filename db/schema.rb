@@ -10,28 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_29_201350) do
+ActiveRecord::Schema.define(version: 2023_01_30_134224) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "quantity"
     t.float "total"
     t.integer "produce_id"
     t.integer "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_carts_on_order_id"
+    t.index ["produce_id"], name: "index_carts_on_produce_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "name"
+    t.integer "phone"
+    t.integer "credit_card"
+    t.integer "exp_mon"
+    t.integer "exp_yr"
+    t.integer "code"
+    t.datetime "purchased_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "produces", force: :cascade do |t|
     t.string "produce"
     t.float "price"
     t.integer "quantity"
-    t.integer "cart_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
-    t.string "kind"
     t.boolean "discount"
     t.float "discount_price"
     t.integer "discount_quantity"
-    t.index ["cart_id"], name: "index_produces_on_cart_id"
+    t.string "image"
+    t.string "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
