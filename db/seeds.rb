@@ -56,7 +56,7 @@ Order.create(name: "Susan")
 # sum = (Cart.produces.price * Cart.quantity)
 
 3.times do
-    Cart.find_or_create_by(produce: Produce.all.sample, order: Order.all.sample, quantity: rand(1..10))
+    Cart.find_or_create_by(produce: Produce.all.sample, order: Order.all.sample, quantity: rand(1..10), total: 0)
 end
 # Cart.create(produce: "Watermelon", image: "https://iili.io/HaQXoAJ.jpg", price: 2.99, quantity: 1, total: 2.99)
 # Cart.create(produce: "Sweet Potato", image: "https://iili.io/HaQXB8g.jpg", price: 2.99, quantity: 1, total: 2.99)

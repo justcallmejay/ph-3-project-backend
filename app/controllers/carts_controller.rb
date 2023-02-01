@@ -20,29 +20,40 @@ class CartsController < ApplicationController
 
   post '/carts' do
     cart = Cart.create(
-      # produce_id: params[:produce_id],
-      # order: params[:order_id],
-      quantity: params[:quantity]
-      # total: params[total]
+      produce_id: params[:produce_id],
+      order_id: params[:order_id],
+      quantity: params[:quantity],
+      total: params[:total]
     )
-    cart.to_json
+    cart.to_json(include: {
+      produce: { only: [:image, :produce, :price] }
+    })
   end
 
   #update specific inventory at cart (ProduceCard.js)
+  
+  # get '/cart/:id' do
+  #   cart = Cart.find(params[:id])
+  #   cart.to_json
+  # end
+  
   patch '/cart/:id' do
     cart = Cart.find(params[:id])
     cart.update(quantity: params[:quantity])
-    cart.to_json
+    cart.to_json(include: {
+      produce: { only: [:image, :produce, :price] }
+    })
   end
+  
+delete '/cart/:id' do
+  cart = Cart.find(params[:id])
+  cart.destroy
+  cart.to_json
+end
 
-  get '/cart/:id' do
-    cart = Cart.find(params[:id])
-    cart.to_json
-  end
-
-
-  # post '/cart' do
-  #   cart = Cart.create(
+end
+# post '/cart' do
+#   cart = Cart.create(
   #     id: params[:id],
   #     produce: params[:produce],
   #     image: params[:image],
@@ -54,16 +65,10 @@ class CartsController < ApplicationController
   #     cart.to_json
   # end
     
-  patch '/update' do
-    cart = Cart.update(
-      name: params[:name],
-      )
-    end
+  # patch '/cart/:id' do
+  #   cart = Cart.update(
+  #     quantity: params[:quantity],
+  #     )
+  #     cart.to_json
+  #   end
 
-  delete '/delete/:id' do
-    cart = Cart.find(params[:id])
-    cart.destroy
-    cart.to_json
-  end
-
-end

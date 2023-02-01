@@ -7,9 +7,9 @@ class Cart < ActiveRecord::Base
     #     puts find_item
     # end
 
-    def total
-        return (self.produce.price * self.quantity)
-    end
+    # def total
+    #     return (self.produces.price * self.quantity)
+    # end
 
     # def image_url
     #     return self.produce.image
