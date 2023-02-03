@@ -34,11 +34,11 @@ Produce.create(produce: "Tomato", image: "https://iili.io/HaQXn9a.jpg", kind: "v
 Produce.create(produce: "Watermelon", image: "https://iili.io/HaQXoAJ.jpg", kind: "fruit", price: 2.99, quantity: 30, discount: true, discount_price: 0.79, discount_quantity: 3)
 Produce.create(produce: "Zucchini", image: "https://iili.io/HaQXxwv.jpg", kind: "vegetable", price: 1.99, quantity: 30, discount: true, discount_price: 0.79, discount_quantity: 3)
 
-Order.create(name: "Tim")
-Order.create(name: "Joe")
-Order.create(name: "Michelle")
-Order.create(name: "Sam")
-Order.create(name: "Susan")
+Order.create(name: "Tim", phone: rand(0000000001..9999999999), credit_card: rand(0000000000000001..9999999999999999), exp_mon: rand(1..12), exp_yr: rand(22..30), code: rand(001..999))
+Order.create(name: "Joe", phone: rand(0000000001..9999999999), credit_card: rand(0000000000000001..9999999999999999), exp_mon: rand(1..12), exp_yr: rand(22..30), code: rand(001..999))
+Order.create(name: "Michelle", phone: rand(0000000001..9999999999), credit_card: rand(0000000000000001..9999999999999999), exp_mon: rand(1..12), exp_yr: rand(22..30), code: rand(001..999))
+Order.create(name: "Sam", phone: rand(0000000001..9999999999), credit_card: rand(0000000000000001..9999999999999999), exp_mon: rand(1..12), exp_yr: rand(22..30), code: rand(001..999))
+Order.create(name: "Susan", phone: rand(0000000001..9999999999), credit_card: rand(0000000000000001..9999999999999999), exp_mon: rand(1..12), exp_yr: rand(22..30), code: rand(001..999))
 #Instead of having attributes in Cart that are identical to Produce, have attributes of id that connect with Produce
 #Instead of having a Purchase class, have a purchsed boolean attribute
 # Cart.create(produce: "Zucchini", image: "https://iili.io/HaQXxwv.jpg", price: 1.99, quantity: 2, total: 3.98, purchase: true)
@@ -56,8 +56,9 @@ Order.create(name: "Susan")
 # sum = (Cart.produces.price * Cart.quantity)
 
 3.times do
-    Cart.find_or_create_by(produce: Produce.all.sample, order: Order.all.sample, quantity: rand(1..10), total: 0)
+    Cart.find_or_create_by(produce: Produce.all.sample, order: Order.all.sample, quantity: rand(1..10), total: rand(1..10), dsc_quantity: rand(1..10), dsc_total: rand(1..10))
 end
+
 # Cart.create(produce: "Watermelon", image: "https://iili.io/HaQXoAJ.jpg", price: 2.99, quantity: 1, total: 2.99)
 # Cart.create(produce: "Sweet Potato", image: "https://iili.io/HaQXB8g.jpg", price: 2.99, quantity: 1, total: 2.99)
 

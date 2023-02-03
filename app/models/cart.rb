@@ -19,5 +19,13 @@ class Cart < ActiveRecord::Base
     #     return self.produce.produce
     # end
 
+    # def self.sum
+    #     carts.map{|cart| cart.total = (self.produces.price * self.quantity)}
+    # end
+
+    def self.orders
+        self.find_by(order_id: 1)
+    end
+
 end
 

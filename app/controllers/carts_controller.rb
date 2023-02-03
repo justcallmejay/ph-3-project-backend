@@ -9,12 +9,13 @@ class CartsController < ApplicationController
   get '/cart' do
     cart = Cart.all
     cart.to_json(include: {
-      produce: { only: [:image, :produce, :price] }
+      produce: { only: [:image, :produce, :price, :discount_price] }
     })
   end
 
+
   get '/purchase' do
-    cart = Cart.where(purchase: true)
+    cart = Cart.where(or: true)
     cart.to_json
   end
 
@@ -23,10 +24,12 @@ class CartsController < ApplicationController
       produce_id: params[:produce_id],
       order_id: params[:order_id],
       quantity: params[:quantity],
+      dsc_quantity: params[:dsc_quantity],
+      dsc_total: params[:dsc_total],
       total: params[:total]
     )
     cart.to_json(include: {
-      produce: { only: [:image, :produce, :price] }
+      produce: { only: [:image, :produce, :price, :discount_price] }
     })
   end
 
@@ -37,13 +40,24 @@ class CartsController < ApplicationController
   #   cart.to_json
   # end
   
-  patch '/cart/:id' do
-    cart = Cart.find(params[:id])
-    cart.update(quantity: params[:quantity])
-    cart.to_json(include: {
-      produce: { only: [:image, :produce, :price] }
-    })
-  end
+patch '/cart/:id' do
+  cart = Cart.find(params[:id])
+  cart.update(
+    quantity: params[:quantity],
+    dsc_quantity: params[:dsc_quantity]
+    )
+  cart.to_json(include: {
+    produce: { only: [:image, :produce, :price, :discount_price] }
+  })
+end
+
+patch '/update/:id' do
+  cart = Cart.find(params[:id])
+  cart.update(order_id: params[:order_id])
+  cart.to_json(include: {
+    produce: { only: [:image, :produce, :price, :discount_price] }
+  })
+end
   
 delete '/cart/:id' do
   cart = Cart.find(params[:id])
