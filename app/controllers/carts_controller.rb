@@ -9,14 +9,18 @@ class CartsController < ApplicationController
   get '/cart' do
     cart = Cart.all
     cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price] }
+      produce: { only: [:image, :produce, :price, :discount_price] },
+      order: { only: [:name, :phone] }
     })
   end
 
 
   get '/purchase' do
-    cart = Cart.where(or: true)
-    cart.to_json
+    cart = Cart.where(order_id: nil)
+    cart.to_json(include: {
+      produce: { only: [:image, :produce, :price, :discount_price] },
+      order: { only: [:name, :phone] }
+    })
   end
 
   post '/carts' do
@@ -51,8 +55,8 @@ patch '/cart/:id' do
   })
 end
 
-patch '/update/:id' do
-  cart = Cart.find(params[:id])
+patch '/update' do
+  cart = Cart.where(order_id: nil)
   cart.update(order_id: params[:order_id])
   cart.to_json(include: {
     produce: { only: [:image, :produce, :price, :discount_price] }
@@ -63,6 +67,14 @@ delete '/cart/:id' do
   cart = Cart.find(params[:id])
   cart.destroy
   cart.to_json
+end
+
+get '/cart/:id' do
+  cart = Cart.where(order_id: params[:id])
+  cart.to_json(include: {
+    order: { only: [:name, :phone]},
+    produce: { only: [:produce, :price, :discount_price]}
+  })
 end
 
 end
@@ -86,3 +98,6 @@ end
   #     cart.to_json
   #   end
 
+  #def total
+  #  allowed_params = %w(quantity price)
+  #  params.selec {|param, value| allowed_params.include?(param)}

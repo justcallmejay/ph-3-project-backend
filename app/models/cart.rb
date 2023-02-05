@@ -27,5 +27,11 @@ class Cart < ActiveRecord::Base
         self.find_by(order_id: 1)
     end
 
+    def self.sum_cost
+        cart.map do |items|
+        puts items.quantity
+      end
+    end
+
 end
 

@@ -17,6 +17,11 @@ class OrdersController < ApplicationController
         order.to_json
     end
 
+    get '/order/:id' do
+        order = Order.find(params[:id])
+        order.to_json
+    end
+
     delete '/order/:id' do
         order = Order.find(params[:id])
         order.destroy
