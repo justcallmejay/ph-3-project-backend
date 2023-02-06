@@ -11,8 +11,9 @@ class Cart < ActiveRecord::Base
     #     return (self.produces.price * self.quantity)
     # end
 
-    # def image_url
-    #     return self.produce.image
+    # def self.total(id)
+    #     a1 = self.find(id)
+    #     puts a1.quantity * a1.produce.price
     # end
 
     # def get_produce
@@ -23,15 +24,16 @@ class Cart < ActiveRecord::Base
     #     carts.map{|cart| cart.total = (self.produces.price * self.quantity)}
     # end
 
-    def self.orders
-        self.find_by(order_id: 1)
-    end
+    # def self.orders
+    #     stuff = self.find_by(order_id: 3)
+    #     puts stuff
+    # end
 
-    def self.sum_cost
-        cart.map do |items|
-        puts items.quantity
-      end
-    end
+    # def sum_cost
+    #     carts.map do |items|
+    #     puts items.quantity
+    #   end
+    # end
 
 end
 

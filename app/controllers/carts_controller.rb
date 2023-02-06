@@ -9,8 +9,8 @@ class CartsController < ApplicationController
   get '/cart' do
     cart = Cart.all
     cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price] },
-      order: { only: [:name, :phone] }
+      produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] },
+      order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
     })
   end
 
@@ -19,7 +19,7 @@ class CartsController < ApplicationController
     cart = Cart.where(order_id: nil)
     cart.to_json(include: {
       produce: { only: [:image, :produce, :price, :discount_price] },
-      order: { only: [:name, :phone] }
+      order: { only: [:name, :phone, :credit_card] }
     })
   end
 
@@ -33,7 +33,7 @@ class CartsController < ApplicationController
       total: params[:total]
     )
     cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price] }
+      produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] }
     })
   end
 
@@ -48,10 +48,12 @@ patch '/cart/:id' do
   cart = Cart.find(params[:id])
   cart.update(
     quantity: params[:quantity],
-    dsc_quantity: params[:dsc_quantity]
+    total: params[:total],
+    dsc_quantity: params[:dsc_quantity],
+    dsc_total: params[:dsc_total]
     )
   cart.to_json(include: {
-    produce: { only: [:image, :produce, :price, :discount_price] }
+    produce: { only: [:image, :produce, :price, :discount_price,  :quantity, :discount_quantity] }
   })
 end
 
@@ -98,6 +100,6 @@ end
   #     cart.to_json
   #   end
 
-  #def total
-  #  allowed_params = %w(quantity price)
-  #  params.selec {|param, value| allowed_params.include?(param)}
+
+    
+    

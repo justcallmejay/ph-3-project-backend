@@ -1,3 +1,8 @@
+# Produce.destroy_all
+# Cart.destroy_all
+# Order.destroy_all
+
+
 Produce.create(produce: "Apple", image: "https://iili.io/HaQXztR.jpg", kind: "fruit", price: 1.50, quantity: 30, discount: true, discount_price: 0.89, discount_quantity: 2)
 Produce.create(produce: "Banana", image: "https://iili.io/HaQXTnp.jpg", kind: "fruit", price: 0.96, quantity: 30, discount: true, discount_price: 1.29, discount_quantity: 2)
 Produce.create(produce: "Blueberry", image: "https://iili.io/HaQXuMN.jpg", kind: "fruit", price: 2.21, quantity: 30, discount: true, discount_price: 0.79, discount_quantity: 3)
@@ -55,9 +60,15 @@ Order.create(name: "Susan", phone: rand(0000000001..9999999999), credit_card: ra
 # Cart.create(produce: "Watermelon", image: "https://iili.io/HaQXoAJ.jpg", price: 2.99, quantity: 1, total: 2.99, purchase: false)
 # sum = (Cart.produces.price * Cart.quantity)
 
+produce = Produce.all.sample
+quantity = rand(1..10)
+total = produce.price * quantity.to_f
+
 3.times do
-    Cart.find_or_create_by(produce: Produce.all.sample, order: Order.all.sample, quantity: rand(1..10), total: rand(1..10), dsc_quantity: rand(1..10), dsc_total: rand(1..10))
+    Cart.find_or_create_by(produce: produce, order: Order.all.sample, quantity: quantity, total: total, dsc_quantity: rand(1..10), dsc_total: rand(1..10))
 end
+
+# def find_id(id)
 
 # Cart.create(produce: "Watermelon", image: "https://iili.io/HaQXoAJ.jpg", price: 2.99, quantity: 1, total: 2.99)
 # Cart.create(produce: "Sweet Potato", image: "https://iili.io/HaQXB8g.jpg", price: 2.99, quantity: 1, total: 2.99)
@@ -67,5 +78,6 @@ end
 #     {produce: "Watermelon", price: 4.99, quantity: 1 }], 
 #     purchse: [{produce: "Tomato", price: 1.39, quantity: 2, total: 2.78}, {produce: "Watermelon", price: 2.99, quantity: 1, total: 2.99}]
 #     )
+
 
 puts 'seed'

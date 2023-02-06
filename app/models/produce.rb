@@ -12,4 +12,9 @@ class Produce < ActiveRecord::Base
     #     puts self.count
     # end
 
+    # def sum
+    #     binding.pry
+    #     puts 'hi'
+    # end
+
 end
