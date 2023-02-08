@@ -22,7 +22,10 @@ class ProducesController < ApplicationController
     #updates store stock (quantity) after user selects item
     patch '/produce/:id' do
     produce = Produce.find(params[:id])
-    produce.update(quantity: params[:quantity])
+    produce.update(
+        quantity: params[:quantity],
+        discount_quantity: params[:discount_quantity]
+        )
     produce.to_json
     end
 
