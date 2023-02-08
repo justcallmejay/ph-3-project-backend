@@ -6,36 +6,36 @@ class CartsController < ApplicationController
   #   cart.to_json
   # end
 
-  get '/cart' do
-    cart = Cart.all
-    cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] },
-      order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
-    })
-  end
+get '/cart' do
+  cart = Cart.all
+  cart.to_json(include: {
+    produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] },
+    order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
+  })
+end
 
 
-  get '/purchase' do
-    cart = Cart.where(order_id: nil)
-    cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price] },
-      order: { only: [:name, :phone, :credit_card] }
-    })
-  end
+get '/purchase' do
+  cart = Cart.where(order_id: nil)
+  cart.to_json(include: {
+    produce: { only: [:image, :produce, :price, :discount_price] },
+    order: { only: [:name, :phone, :credit_card] }
+  })
+end
 
-  post '/carts' do
-    cart = Cart.create(
-      produce_id: params[:produce_id],
-      order_id: params[:order_id],
-      quantity: params[:quantity],
-      dsc_quantity: params[:dsc_quantity],
-      dsc_total: params[:dsc_total],
-      total: params[:total]
-    )
-    cart.to_json(include: {
-      produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] }
-    })
-  end
+post '/carts' do
+  cart = Cart.create(
+    produce_id: params[:produce_id],
+    order_id: params[:order_id],
+    quantity: params[:quantity],
+    total: params[:total],
+    dsc_quantity: params[:dsc_quantity],
+    dsc_total: params[:dsc_total]
+  )
+  cart.to_json(include: {
+    produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] }
+  })
+end
 
   #update specific inventory at cart (ProduceCard.js)
   
@@ -53,15 +53,16 @@ patch '/cart/:id' do
     dsc_total: params[:dsc_total]
     )
   cart.to_json(include: {
-    produce: { only: [:image, :produce, :price, :discount_price,  :quantity, :discount_quantity] }
+    produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] }
   })
 end
 
-patch '/update' do
-  cart = Cart.where(order_id: nil)
+patch '/account/:id' do
+  cart = Cart.find(params[:id])
   cart.update(order_id: params[:order_id])
   cart.to_json(include: {
-    produce: { only: [:image, :produce, :price, :discount_price] }
+    produce: { only: [:image, :produce, :price, :discount_price] },
+    order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
   })
 end
   
@@ -74,7 +75,7 @@ end
 get '/cart/:id' do
   cart = Cart.where(order_id: params[:id])
   cart.to_json(include: {
-    order: { only: [:name, :phone]},
+    order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code]},
     produce: { only: [:produce, :price, :discount_price]}
   })
 end
