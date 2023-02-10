@@ -7,11 +7,11 @@ class ProducesController < ApplicationController
     end
     
     #NOT USING; just practice
-    patch '/update/:id' do
-    produce = Produce.find(params[:id])
-    produce.update(quantity: params[:quantity])
-    produce.to_json
-    end
+    # patch '/update/:id' do
+    # produce = Produce.find(params[:id])
+    # produce.update(quantity: params[:quantity])
+    # produce.to_json
+    # end
     
     #NOT USING; just practice
     get '/produce/:id' do

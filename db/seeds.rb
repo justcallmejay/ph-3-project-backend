@@ -63,9 +63,13 @@ Order.create(name: "Susan", phone: rand(0000000001..9999999999), credit_card: ra
 produce = Produce.all.sample
 quantity = rand(1..10)
 total = produce.price * quantity.to_f
+dsc_qty = rand(1..10)
+dsc_total = produce.discount_price * dsc_qty.to_f
+
+time = DateTime.new(2001,2,3,4,5,6)
 
 3.times do
-    Cart.find_or_create_by(produce: produce, order: Order.all.sample, quantity: quantity, total: total, dsc_quantity: rand(1..10), dsc_total: rand(1..10))
+    Cart.find_or_create_by(produce: produce, order: Order.all.sample, quantity: quantity, total: total, dsc_quantity: dsc_qty, dsc_total: dsc_total, purchased_at: time)
 end
 
 # def find_id(id)

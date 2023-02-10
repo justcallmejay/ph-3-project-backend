@@ -59,10 +59,13 @@ end
 
 patch '/account/:id' do
   cart = Cart.find(params[:id])
-  cart.update(order_id: params[:order_id])
+  cart.update(
+    order_id: params[:order_id],
+    purchased_at: params[:purchased_at]
+  )
   cart.to_json(include: {
     produce: { only: [:image, :produce, :price, :discount_price] },
-    order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
+    order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code, :purchased_at] }
   })
 end
   
