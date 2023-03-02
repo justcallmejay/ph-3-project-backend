@@ -17,10 +17,16 @@ class OrdersController < ApplicationController
         order.to_json
     end
 
-    get '/order/:id' do
-        order = Order.find(params[:id])
+    get '/order/find=*' do
+        order = Order.find_by(credit_card: params[:splat])
         order.to_json
     end
+
+    #works with models method
+    # get '/order/find=*' do
+    #     order = Order.getPersonOrder(params[:splat])
+    #     order.to_json
+    # end
 
     delete '/order/:id' do
         order = Order.find(params[:id])

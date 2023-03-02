@@ -6,16 +6,22 @@ class CartsController < ApplicationController
   #   cart.to_json
   # end
 
-get '/cart' do
-  cart = Cart.all
+get '/purchased' do
+  cart = Cart.where.not(order_id: nil)
   cart.to_json(include: {
     produce: { only: [:image, :produce, :price, :discount_price, :quantity, :discount_quantity] },
     order: { only: [:name, :phone, :credit_card, :exp_mon, :exp_yr, :code] }
   })
 end
 
+get '/total' do
+  cart = Cart.getCart
+  cart.to_json
+end
 
-get '/purchase' do
+
+
+get '/cart' do
   cart = Cart.where(order_id: nil)
   cart.to_json(include: {
     produce: { only: [:image, :produce, :price, :discount_price] },

@@ -14,7 +14,7 @@ class ProducesController < ApplicationController
     # end
     
     #NOT USING; just practice
-    get '/produce/:id' do
+    get '/produces/:id' do
     produce = Produce.find(params[:id])
     produce.to_json
     end
@@ -29,10 +29,29 @@ class ProducesController < ApplicationController
     produce.to_json
     end
 
+    #works
+    # patch '/prod/:id' do
+    #     produce = Produce.updateProduceQuantity(params[:id], params[:quantity], params[:discount_quantity])
+    #     produce.to_json
+    # end
+
     #filter inventory via radio button
     get '/produce/*' do
     produce = Produce.where(kind: params[:splat])
     produce.to_json
+    end
+
+    #only works if you type the whole item
+    # get '/item/*' do
+    #     produce = Produce.where("produce = ?", params[:splat])
+    #     produce.to_json
+    # end
+
+    
+    get '/name/*' do
+        partial_text = params[:splat].first
+        produce = Produce.where("produce LIKE ?", "%#{partial_text}%")
+        produce.to_json
     end
 
 end
