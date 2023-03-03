@@ -1,8 +1,10 @@
 # Fresh Market
 
-This is the backend of Phase 3 project for Flatiron.  This focuses on querying the database by the client side using Sinatra and ActiveRecord.
+This is the backend of Phase 3 project for Flatiron.  This focuses on querying the database from the client side using Sinatra and ActiveRecord.
 
 Here, there are a few endpoints that holds responsibility and some using ActiveRecord methods.
+
+## Controller
 
 # Filter
 
@@ -12,10 +14,20 @@ This backend can query the database when the user selects a radio button using t
 
 This backend also feature search function from the frontend that will return produces that contain the input.  For example, if a user typed in 'apple' the backend will return 'apple' and 'pineapple.'
 
+## Model
+
+Included are a few methods that showcase the interaction between files inside model folder and files inside controller folder.
+
+## Class
+
 # Cart
 
-Items that are selected in the cart holds foreign keys of a produce and order.  This allows the frontend to retrieve the data that matches the produce id while still obtaining attributes and properties of a cart (eg: quantity, total, etc.).
+Items that are selected in Cart holds foreign keys of Produce and Order.  This allows the frontend to retrieve the data that matches the produce_id while still obtaining attributes and properties of Cart (eg: quantity, total, etc.).  When the client places an order, the app will add a value to order_id.
 
 # Order
 
-Instances of the order class contain information of the customer, such as name, phone number and credit card.
+Instances of the Order class contain information of the customer: name, phone number, credit card, expiration date (month and year), and code.
+
+# Seeds
+
+The seeds file inside the db folder contain instances of 35 Produce instances, sample Orders holding attributes of sample customers that I assembled, and random orders in Cart.  First, type 'install bundle', then 'rake server' after installation is completed.

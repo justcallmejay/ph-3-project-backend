@@ -23,6 +23,7 @@ class Cart < ActiveRecord::Base
         cart.map(&:total).inject(0, &:+)
     end
 
+    #in controller
     def self.getCart
         cart = Cart.all
     end
