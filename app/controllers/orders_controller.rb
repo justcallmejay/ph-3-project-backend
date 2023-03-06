@@ -1,37 +1,23 @@
 class OrdersController < ApplicationController
-
-    get '/order' do
-        order = Order.all
-        order.to_json
-    end
-
-    post '/order' do
-        order = Order.create(
-            name: params[:name],
-            phone: params[:phone],
-            credit_card: params[:credit_card],
-            exp_mon: params[:exp_mon],
-            exp_yr: params[:exp_yr],
-            code: params[:code]
+    
+#in React
+post '/order' do
+    order = Order.create(
+        name: params[:name],
+        phone: params[:phone],
+        credit_card: params[:credit_card],
+        exp_mon: params[:exp_mon],
+        exp_yr: params[:exp_yr],
+        code: params[:code]
         )
-        order.to_json
-    end
+    order.to_json
+end
 
-    get '/order/find=*' do
-        order = Order.find_by(credit_card: params[:splat])
-        order.to_json
-    end
-
-    #works with models method
-    # get '/order/find=*' do
-    #     order = Order.getPersonOrder(params[:splat])
-    #     order.to_json
-    # end
-
-    delete '/order/:id' do
-        order = Order.find(params[:id])
-        order.destroy
-        order.to_json
-    end
+#in model
+#in React
+get '/order/find=*' do
+    order = Order.getPersonOrder(params[:splat])
+    order.to_json
+end
 
 end

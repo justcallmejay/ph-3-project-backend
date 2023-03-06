@@ -3,7 +3,7 @@ Cart.destroy_all
 Order.destroy_all
 
 Produce.create(produce: "Apple", image: "https://iili.io/HaQXztR.jpg", kind: "fruit", price: 1.50, quantity: 300, discount: true, discount_price: 0.89, discount_quantity: 245)
-Produce.create(produce: "Banana", image: "https://iili.io/HaQXTnp.jpg", kind: "fruit", price: 0.96, quantity: 300, discount: true, discount_price: 1.29, discount_quantity: 245)
+Produce.create(produce: "Banana", image: "https://iili.io/HaQXTnp.jpg", kind: "fruit", price: 2.96, quantity: 300, discount: true, discount_price: 1.29, discount_quantity: 245)
 Produce.create(produce: "Blueberry", image: "https://iili.io/HaQXuMN.jpg", kind: "fruit", price: 2.21, quantity: 300, discount: true, discount_price: 0.79, discount_quantity: 245)
 Produce.create(produce: "Broccoli", image: "https://iili.io/HaQXAPI.jpg", kind: "vegetable", price: 2.91, quantity: 300, discount: true, discount_price: 0.79, discount_quantity: 245)
 Produce.create(produce: "Cantalope", image: "https://iili.io/HaQX5Ft.jpg", kind: "fruit", price: 3.99, quantity: 300, discount: true, discount_price: 0.79, discount_quantity: 245)
